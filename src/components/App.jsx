@@ -69,27 +69,46 @@ import { Spiner } from "./Spiner/Spiner";
 // };
 
 export const App = () => {
-  const [photos, setPhotos] = useState(null);
+  const [photos, setPhotos] = useState([]);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (query === '') return;
-    const fetchedImages = async() => {
+    // const controller = new AbortController();
+    const fetchedImages = async () => {
       try {
-      setIsLoading(true);
-      const response = await fetchGalery(query, page);
-      let newPhotos = response.data.hits;
-      setPhotos(newPhotos);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+        setIsLoading(true);
+        const response = await fetchGalery(query, page);
+        let newPhotos = response.data.hits;
+        if (page === 1) {
+          setPhotos([]);
+        }
+        setPhotos(pervState => [...pervState, ...newPhotos]);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchedImages();
-  }, [page, query])
+    // return () => {
+    //   controller.abort();
+    // };
+  }, [page, query]);
+
+  // const onSubmit = value => {
+  //   try {
+  //     if (value === query) {
+  //       return;
+  //     }
+  //     setQuery(value);
+  //     setPage([]);
+  //   } catch (err) {
+  //     alert(err.message);
+  //   }
+  // };
   
   const loadsMore = () => {
     setPage(prevState => prevState + 1);
@@ -100,8 +119,8 @@ export const App = () => {
       <GlobalStyle />
           <Searchbar query={setQuery} />
           <Spiner visible={isLoading} />
-          {photos && <ImageGalery items={photos} />}
-          {photos && <Button loadsMore={loadsMore} />}
+          {photos.length !== 0 && <ImageGalery items={photos} />}
+          {photos.length !== 0 && <Button loadsMore={loadsMore} />}
       </Layout>
     </ThemeProvider>
   );
