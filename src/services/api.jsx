@@ -1,9 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
-const KEY = '34533361-52f77fc65512da5c1ec10b6c5';
+const KEY = '36141153-03c26a22f051b013ba3a47773';
 axios.defaults.baseURL = `https://pixabay.com/api/`;
 
-export const fetchGalery = (query, page=1) => {
-    const response = axios.get(`?q=${query}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=15`);
-    return response;
-    };
+export const fetchGalery = (query, page = 1) => {
+  const response = axios.get(
+    `?q=${query}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=15`
+  );
+  return response;
+};

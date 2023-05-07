@@ -25,6 +25,9 @@ export const App = () => {
         setIsLoading(true);
         const response = await fetchGalery(query, page);
         let newPhotos = response.data.hits;
+        if (page === 1) {
+          setPhotos([]);
+        }
         setPhotos(prevState => [...prevState, ...newPhotos]);
       } catch (error) {
         console.log(error);
