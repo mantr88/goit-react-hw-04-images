@@ -38,6 +38,13 @@ export const App = () => {
     fetchImages();
   }, [page, query]);
 
+  const queryHandler = searchQuery => {
+    if (searchQuery === query) return;
+    setPhotos([]);
+    setQuery(searchQuery);
+    setPage(1);
+  };
+
   const loadsMore = () => {
     setPage(prevState => prevState + 1);
   };
@@ -46,7 +53,7 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <Layout>
         <GlobalStyle />
-        <Searchbar query={setQuery} />
+        <Searchbar query={queryHandler} />
         <Spiner visible={isLoading} />
         {photos.length !== 0 && <ImageGalery items={photos} />}
         {photos.length !== 0 && <Button loadsMore={loadsMore} />}

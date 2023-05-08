@@ -1,12 +1,11 @@
-import styled from "styled-components";
-import { Form as FormikForm, Field as FormField } from "formik";
-
+import styled from 'styled-components';
+import { Form as FormikForm, Field as FormField } from 'formik';
 
 export const Header = styled.header`
   top: 0;
   left: 0;
   position: sticky;
-  /* z-index: 11; */
+  z-index: 11;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +21,7 @@ export const Header = styled.header`
 `;
 
 export const Form = styled(FormikForm)`
-    display: flex;
+  display: flex;
   align-items: center;
   width: 100%;
   max-width: 600px;
@@ -32,7 +31,7 @@ export const Form = styled(FormikForm)`
 `;
 
 export const FormButton = styled.button`
-    display: inline-block;
+  display: inline-block;
   width: 48px;
   height: 48px;
   border: 0;
@@ -45,14 +44,14 @@ export const FormButton = styled.button`
   cursor: pointer;
   outline: none;
 
-  :hover{
+  :hover {
     opacity: 1;
     color: #324ce1;
   }
 `;
 
 export const Field = styled(FormField)`
-    display: inline-block;
+  display: inline-block;
   width: 100%;
   font: inherit;
   font-size: 20px;
@@ -61,8 +60,8 @@ export const Field = styled(FormField)`
   padding-left: 4px;
   padding-right: 4px;
 
-  ::placeholder{
+  ::placeholder {
     font: inherit;
-  font-size: 18px;
+    font-size: 18px;
   }
 `;
